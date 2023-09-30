@@ -1,30 +1,19 @@
 import axios from 'axios';
-import { config } from 'dotenv';
-config();
-
-
-// define information of telegram bot
-const CHAT_ID = process.env.CHAT_ID;
-const BOT_TOKEN = process.env.BOT_TOKEN;
-const BOT_URL = `https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`;
-
+import { getMessageApi } from './utils.js';
 
 // send message to telegram bot
-const sendNotification =  (message)=>{
+const sendMessage =  (message,chatId,botToken)=>{
   // Define the request payload
     const payload = {
-        chat_id: CHAT_ID,
+        chat_id: chatId,
         text: message,
       };
     // return a promise to post the payload to the bot
     return axios
-    .post(BOT_URL, payload)
-    .then(response => {
-
-    })
+    .post(getMessageApi(botToken), payload)
     .catch(error => {
         console.log(error.response.status,` - ${error.response.data.description}`)
     });
 }
 
-export default sendNotification;
+export default sendMessage;
