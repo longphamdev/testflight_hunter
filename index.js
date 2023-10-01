@@ -1,8 +1,8 @@
 import axios from 'axios';
 import * as cheerio from 'cheerio';
 import  constant from './constant.js';
-import sendMessage from "./telegram_bot.js";
 import { server } from "./utils.js";
+import {sendMessage, botHandleMessage} from "./telegramBotApi.js";
 
 const {
   CHAT_ID,
@@ -22,6 +22,7 @@ const {
 
 function main(watchIds, sendMessage, sleepTime = 10000,uptimeTrack) {
  
+  console.log(ID_LIST)
   // check if env variable is not set, return
   if(!(CHAT_ID && BOT_UPTIME_TRACKER_TOKEN && PORT))
   {
@@ -32,7 +33,7 @@ function main(watchIds, sendMessage, sleepTime = 10000,uptimeTrack) {
   // start server
   console.log(`Server is running on port: ${PORT}`);
   server(CHAT_ID, BOT_UPTIME_TRACKER_TOKEN,PORT);
-
+  botHandleMessage(BOT_WATCHER_TOKEN);
   // start watcher
   setInterval(async () => {
     const watcher = async () => {
@@ -103,6 +104,7 @@ function main(watchIds, sendMessage, sleepTime = 10000,uptimeTrack) {
       }
     }
     watcher();
+
   }, sleepTime);
 }
 

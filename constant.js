@@ -1,11 +1,13 @@
 import { config } from 'dotenv';
 config();
 
+import idList from './id_list.json' assert { type: 'json' };
+
 // get from env file
 const CHAT_ID = process.env.CHAT_ID;
 const BOT_WATCHER_TOKEN = process.env.BOT_WATCHER_TOKEN;
 const BOT_UPTIME_TRACKER_TOKEN = process.env.BOT_UPTIME_TRACKER_TOKEN;
-const ID_LIST = process.env.ID_LIST.split(',');
+const ID_LIST = idList.id;
 const SLEEP_TIME = process.env.INTERVAL_CHECK;
 const ENABLE_UPTIME_TRACKER = process.env.ENABLE_UPTIME_TRACKER;
 const PORT = process.env.PORT;

@@ -1,5 +1,6 @@
 import http from 'http';
-import  sendMessage from './telegram_bot.js';
+import  { sendMessage } from './telegramBotApi.js';
+import fs from 'fs';
 
 export const getMessageApi = (botToken) =>  `https://api.telegram.org/bot${botToken}/sendMessage`;
 
