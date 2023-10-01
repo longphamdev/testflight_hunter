@@ -1,9 +1,12 @@
 import http from 'http';
+import  sendMessage from './telegram_bot.js';
 
 export const getMessageApi = (botToken) =>  `https://api.telegram.org/bot${botToken}/sendMessage`;
 
 // this server using for keep alive free hosting and checking bot is alive
-export const server = () => http.createServer(async function(req, res) {
-    res.write(`Bot is alive`);
+export const server = (chatId, botUptimeTrackerToken,port) => http.createServer(async function(req, res) {
+    // send message to uptime tracker bot
+    await sendMessage(`Server is running on port: ${port}`, chatId, botUptimeTrackerToken);
+    res.write(`Server is running on port ${port}`);
     res.end();
-  }).listen(8080);
+  }).listen(port);
