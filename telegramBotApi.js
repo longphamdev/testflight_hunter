@@ -13,7 +13,7 @@ export const sendMessage =  (message,chatId,botToken)=>{
     return axios
     .post(getMessageApi(botToken), payload)
     .catch(error => {
-        console.log(error.response.status,` - ${error.response.data.description}`)
+       // console.log(error.response.status,` - ${error.response.data.description}`)
     });
 }
 
